@@ -13,7 +13,14 @@ public class Game1 : Game
     private SimpleAnimation _walkingAnimation;
     Vector2 _playerInput;
     private Texture2D _background;
-    private string _text = "Hello World";
+    private Texture2D _signpost;
+    private Texture2D _movingBlock;
+    private Vector2 _blockPos;
+    private Vector2 _blockEndPos;
+    private Vector2 _blockStartPos;
+
+    private int _speed = 5;
+    private string _text = "Welcome to Pixel World!";
 
     public Game1()
     {
@@ -29,6 +36,7 @@ public class Game1 : Game
     {
         // TODO: Add your initialization logic here
 
+
         base.Initialize();
     }
 
@@ -37,6 +45,12 @@ public class Game1 : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
         _arial = Content.Load<SpriteFont>("Arial");
         _background = Content.Load<Texture2D>("forest_pixel");
+        _signpost = Content.Load<Texture2D>("signpost32px");
+        _movingBlock = Content.Load<Texture2D>("Pixel_Ground_Sprite");
+        _blockPos = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight - 200);
+        _blockEndPos = new Vector2(_graphics.PreferredBackBufferWidth - 200, _graphics.PreferredBackBufferHeight - 200);
+        _blockStartPos = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight - 200);
+        
 
         // TODO: use this.Content to load your game content here
     }
@@ -45,6 +59,17 @@ public class Game1 : Game
     {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
+
+        _blockPos.X += _speed;
+        
+        if (_blockPos == _blockEndPos)
+        {
+            _speed = -_speed;
+        }
+        if (_blockPos == _blockStartPos)
+        {
+            _speed = -_speed;
+        }
 
         // TODO: Add your update logic here
 
@@ -56,8 +81,10 @@ public class Game1 : Game
         GraphicsDevice.Clear(Color.CornflowerBlue);
 
         _spriteBatch.Begin();
-        _spriteBatch.DrawString(_arial, _text, Vector2.Zero, Color.Red);
         _spriteBatch.Draw(_background, new Rectangle(0, 0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight), Color.White);
+        _spriteBatch.DrawString(_arial, _text, Vector2.Zero, Color.White);
+        _spriteBatch.Draw(_movingBlock, _blockPos, Color.White);
+        _spriteBatch.Draw(_signpost, new Rectangle(_graphics.PreferredBackBufferWidth/4, _graphics.PreferredBackBufferHeight-100,80,100),Color.White);
         _spriteBatch.End();
 
         // TODO: Add your drawing code here
