@@ -18,6 +18,7 @@ public class Game1 : Game
     private Vector2 _blockPos;
     private Vector2 _blockEndPos;
     private Vector2 _blockStartPos;
+    private Vector2 _spawnPoint;
 
     private int _speed = 5;
     private string _text = "Welcome to Pixel World!";
@@ -50,6 +51,8 @@ public class Game1 : Game
         _blockPos = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight - 200);
         _blockEndPos = new Vector2(_graphics.PreferredBackBufferWidth - 200, _graphics.PreferredBackBufferHeight - 200);
         _blockStartPos = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight - 200);
+        _spawnPoint = new Vector2(20, _graphics.PreferredBackBufferHeight/2);
+        //_walkingAnimation = new SimpleAnimation(Content.Load<Texture2D>("Pixel_Walking_Animation"), 200, 195, 5, 10);
         
 
         // TODO: use this.Content to load your game content here
@@ -85,6 +88,7 @@ public class Game1 : Game
         _spriteBatch.DrawString(_arial, _text, Vector2.Zero, Color.White);
         _spriteBatch.Draw(_movingBlock, _blockPos, Color.White);
         _spriteBatch.Draw(_signpost, new Rectangle(_graphics.PreferredBackBufferWidth/4, _graphics.PreferredBackBufferHeight-100,80,100),Color.White);
+        //_walkingAnimation.Draw(_spriteBatch, _spawnPoint, SpriteEffects.None);
         _spriteBatch.End();
 
         // TODO: Add your drawing code here
