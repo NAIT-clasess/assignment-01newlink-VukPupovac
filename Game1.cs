@@ -52,7 +52,7 @@ public class Game1 : Game
         _blockEndPos = new Vector2(_graphics.PreferredBackBufferWidth - 200, _graphics.PreferredBackBufferHeight - 200);
         _blockStartPos = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight - 200);
         _spawnPoint = new Vector2(20, _graphics.PreferredBackBufferHeight/2);
-        //_walkingAnimation = new SimpleAnimation(Content.Load<Texture2D>("Pixel_Walking_Animation"), 200, 195, 5, 10);
+        _walkingAnimation = new SimpleAnimation(Content.Load<Texture2D>("Run (32x32)"), 384/12, 32, 12, 10);
         
 
         // TODO: use this.Content to load your game content here
@@ -62,6 +62,8 @@ public class Game1 : Game
     {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
+        
+        _walkingAnimation.Update(gameTime);
 
         _blockPos.X += _speed;
         
@@ -88,7 +90,7 @@ public class Game1 : Game
         _spriteBatch.DrawString(_arial, _text, Vector2.Zero, Color.White);
         _spriteBatch.Draw(_movingBlock, _blockPos, Color.White);
         _spriteBatch.Draw(_signpost, new Rectangle(_graphics.PreferredBackBufferWidth/4, _graphics.PreferredBackBufferHeight-100,80,100),Color.White);
-        //_walkingAnimation.Draw(_spriteBatch, _spawnPoint, SpriteEffects.None);
+        _walkingAnimation.Draw(_spriteBatch, _spawnPoint, SpriteEffects.None);
         _spriteBatch.End();
 
         // TODO: Add your drawing code here
