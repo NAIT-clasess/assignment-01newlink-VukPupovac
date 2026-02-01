@@ -26,7 +26,8 @@ public class Game1 : Game
     private Vector2 _blockStartPos;
     private Vector2 _playerLocation;
     private Vector2 _frogSpawn;  
-    Vector2 _playerInput;
+    private Vector2 _playerInput;
+
     private Rectangle _screenBox;
 
     private int _speed = 5;
@@ -81,7 +82,7 @@ public class Game1 : Game
 
     protected override void Update(GameTime gameTime)
     {
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+        if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
         
         _walkingAnimation.Update(gameTime);
@@ -120,15 +121,10 @@ public class Game1 : Game
         if (!_screenBox.Contains(_playerLocation))
         {
             _playerLocation.X = MathHelper.Clamp(_playerLocation.X, 0, _graphics.PreferredBackBufferWidth - 64);
-            _playerLocation.Y = MathHelper.Clamp(_playerLocation.Y, 0, _graphics.PreferredBackBufferHeight - 64);
+            _playerLocation.Y = MathHelper.Clamp(_playerLocation.Y, 0, _graphics.PreferredBackBufferHeight - 68);
         }
         
         _playerLocation += _playerInput*_moveSpeed;
-
-        Console.WriteLine($"{_playerLocation}");
-
-
-        // TODO: Add your update logic here
 
         base.Update(gameTime);
     }
