@@ -1,0 +1,7 @@
+- Background Rendering | Completed
+- Static Image Rendering | Completed
+- Animated Sprite Sequence 1 | Completed
+- Animated Sprite Sequence 2 | Completed
+- Text Rendering | Completed
+- Automatic Movement of On-Screen Content | Completed
+- Keyboard Controlled Movement | Completed
